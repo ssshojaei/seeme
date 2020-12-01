@@ -3,7 +3,7 @@ import ButtonLinks from '../utils/ButtonLinks'
 import Downloader from '../utils/Downloader'
 import FixImage from '../utils/FixImage'
 
-export const Finish = (ctx, bot, CHANNEL) => {
+export const Finish = (ctx, bot, CHANNEL, groups) => {
   if (ctx.message.photo) {
     let photo = ctx.message.photo
     photo = photo.reverse()[0]
@@ -57,10 +57,13 @@ export const Finish = (ctx, bot, CHANNEL) => {
               }
             )
             .then(res => {
-              bot.telegram.forwardMessage(
-                ctx.message.from.id,
-                CHANNEL,
-                res.message_id
+              [...groups, ctx.message.from.id].map(chatID =>
+                bot.telegram.forwardMessage(
+                  chatID
+                  ,
+                  CHANNEL,
+                  res.message_id
+                )
               )
               ctx.reply(
                 `تو هم میتونی با معرفی @SeeMe_ir به بقیه، به بزرگ شدن این خانواده کمک کنی ❤️`

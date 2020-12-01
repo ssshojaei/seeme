@@ -20,6 +20,7 @@ const USERNAME = process.env.USERNAME || ''
 const PORT = (process.env.PORT && parseInt(process.env.PORT, 10)) || 3000
 const WEBHOOK_URL = `${process.env.WEBHOOK_URL}/bot${BOT_TOKEN}`
 const CHANNEL = '@seeme_ir'
+const groups = ['1048326975']
 
 const superWizard = new WizardScene(
   'super-wizard',
@@ -33,7 +34,7 @@ const superWizard = new WizardScene(
   Email,
   Links,
   Image,
-  ctx => Finish(ctx, bot, CHANNEL)
+  ctx => Finish(ctx, bot, CHANNEL, groups)
 )
 const stage = new Stage([superWizard])
 const bot = new Telegraf(BOT_TOKEN, { username: USERNAME })
