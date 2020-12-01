@@ -49,17 +49,18 @@ bot.command('start', ctx => {
     ما اینجا تلاش میکنیم به کمک شما، جامعه‌ی فناوری شیراز رو بیش از پیش به هم متصل کنیم
     معرفی شما در تیم‌های اصلی جامعه‌ی شیراز منتشر میشن و به اعضا معرفی میشید!
     `,
-      Markup.inlineKeyboard([
-        Markup.urlButton('چطور کار میکنه؟', 'https://roxaleh.ir/seeme'),
-        Markup.callbackButton('➕ خود را معرفی کنید', 'next'),
-      ]).extra()
-    )
-  })
-  
-bot.action('next', (ctx) => {
+    Markup.inlineKeyboard([
+      Markup.urlButton('چطور کار میکنه؟', 'https://roxaleh.ir/seeme'),
+      Markup.callbackButton('➕ خود را معرفی کنید', 'next'),
+    ]).extra()
+  )
+})
+
+bot.action('next', ctx => {
   console.log(ctx)
   ctx.scene.enter('super-wizard')
-  ctx.update.callback_query.message.chat.type === 'private' && ctx.scene.enter('super-wizard')
+  ctx.update.callback_query.message.chat.type === 'private' &&
+    ctx.scene.enter('super-wizard')
 })
 
 const production = () => {

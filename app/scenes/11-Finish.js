@@ -57,13 +57,8 @@ export const Finish = (ctx, bot, CHANNEL, groups) => {
               }
             )
             .then(res => {
-              [...groups, ctx.message.from.id].map(chatID =>
-                bot.telegram.forwardMessage(
-                  chatID
-                  ,
-                  CHANNEL,
-                  res.message_id
-                )
+              ;[...groups, ctx.message.from.id].map(chatID =>
+                bot.telegram.forwardMessage(chatID, CHANNEL, res.message_id)
               )
               ctx.reply(
                 `تو هم میتونی با معرفی @SeeMe_ir به بقیه، به بزرگ شدن این خانواده کمک کنی ❤️`
