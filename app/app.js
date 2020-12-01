@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { Telegraf, Stage, session } from 'telegraf'
+import { Telegraf, Stage, session, Markup } from 'telegraf'
 import WizardScene from 'telegraf/scenes/wizard'
 import {
   Name,
@@ -19,7 +19,7 @@ const BOT_TOKEN = process.env.BOT_TOKEN || ''
 const USERNAME = process.env.USERNAME || ''
 const PORT = (process.env.PORT && parseInt(process.env.PORT, 10)) || 3000
 const WEBHOOK_URL = `${process.env.WEBHOOK_URL}/bot${BOT_TOKEN}`
-const CHANNEL = '@SeeMeTestChannel'
+const CHANNEL = '@seeme_ir'
 
 const superWizard = new WizardScene(
   'super-wizard',
@@ -43,7 +43,22 @@ bot.use(stage.middleware())
 bot.use(Telegraf.log())
 
 bot.command('start', ctx => {
-  ctx.message.chat.type === 'private' && ctx.scene.enter('super-wizard')
+  return ctx.replyWithMarkdown(
+    `درود، به ربات من رو ببین خوش اومدید
+    ما اینجا تلاش میکنیم به کمک شما، جامعه‌ی فناوری شیراز رو بیش از پیش به هم متصل کنیم
+    معرفی شما در تیم‌های اصلی جامعه‌ی شیراز منتشر میشن و به اعضا معرفی میشید!
+    `,
+      Markup.inlineKeyboard([
+        Markup.urlButton('چطور کار میکنه؟', 'https://roxaleh.ir/seeme'),
+        Markup.callbackButton('➕ خود را معرفی کنید', 'next'),
+      ]).extra()
+    )
+  })
+  
+bot.action('next', (ctx) => {
+  console.log(ctx)
+  ctx.scene.enter('super-wizard')
+  ctx.update.callback_query.message.chat.type === 'private' && ctx.scene.enter('super-wizard')
 })
 
 const production = () => {

@@ -1,5 +1,5 @@
 {
-  "name": "telegraf_boilerplate",
+  "name": "seeme_ir_bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,11 +7,11 @@
     "dev": "nodemon --exec babel-node ./app/app.js development",
     "start": "babel-node ./app/app.js production"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Roxaleh",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "axios": "^0.21.0",
-    "debug": "^4.3.1",
+    "babel-node": "^0.0.1-security",
     "dotenv": "^8.2.0",
     "sharp": "^0.26.3",
     "telegraf": "^3.38.0",
