@@ -46,19 +46,21 @@ bot.use(Telegraf.log())
 bot.command('start', ctx => {
   return ctx.replyWithMarkdown(
     `درود، به ربات من رو ببین خوش اومدید
-    ما اینجا تلاش میکنیم به کمک شما، جامعه‌ی فناوری شیراز رو بیش از پیش به هم متصل کنیم
-    معرفی شما در تیم‌های اصلی جامعه‌ی شیراز منتشر میشن و به اعضا معرفی میشید!
+    ما اینجا تلاش می‌کنیم به کمک شما، جامعه‌ی فناوری شیراز رو بیش از پیش به هم متصل کنیم
+    معرفی شما در تیم‌های اصلی جامعه‌ی شیراز منتشر میشه و به سایر اعضای جامعه معرفی می‌شید!
+    با سپاس از گروه هم‌فکر و شیرازلاگ ❤️
     `,
     Markup.inlineKeyboard([
-      Markup.urlButton('چطور کار میکنه؟', 'https://roxaleh.ir/seeme'),
-      Markup.callbackButton('➕ خود را معرفی کنید', 'next'),
+      [
+        Markup.urlButton('چطور کار میکنه؟', 'https://roxaleh.ir/seeme'),
+        Markup.callbackButton('➕ خود را معرفی کنید', 'next'),
+      ],
+      [Markup.urlButton('سورس کد ربات', 'https://github.com/ssshojaei/seeme')],
     ]).extra()
   )
 })
 
 bot.action('next', ctx => {
-  console.log(ctx)
-  ctx.scene.enter('super-wizard')
   ctx.update.callback_query.message.chat.type === 'private' &&
     ctx.scene.enter('super-wizard')
 })
