@@ -22,6 +22,9 @@ const WEBHOOK_URL = `${process.env.WEBHOOK_URL}/bot${BOT_TOKEN}`
 const CHANNEL = '@seeme_ir'
 const groups = ['1048326975']
 
+const isPrivate = ctx =>
+  ctx.update.callback_query.message.chat.type === 'private'
+
 const superWizard = new WizardScene(
   'super-wizard',
   Name,
@@ -36,6 +39,14 @@ const superWizard = new WizardScene(
   Image,
   ctx => Finish(ctx, bot, CHANNEL, groups)
 )
+
+superWizard.command(
+  'reset',
+  ctx =>
+    ctx.scene.leave() &&
+    ctx.reply('فرم ری‌ست شد. میتونی با زدن روی /start از اول شروع کنی')
+)
+
 const stage = new Stage([superWizard])
 const bot = new Telegraf(BOT_TOKEN, { username: USERNAME })
 
@@ -61,8 +72,7 @@ bot.command('start', ctx => {
 })
 
 bot.action('next', ctx => {
-  ctx.update.callback_query.message.chat.type === 'private' &&
-    ctx.scene.enter('super-wizard')
+  isPrivate(ctx) && ctx.scene.enter('super-wizard')
 })
 
 const production = () => {
