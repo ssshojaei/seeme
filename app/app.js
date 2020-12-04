@@ -20,7 +20,7 @@ const USERNAME = process.env.USERNAME || ''
 const PORT = (process.env.PORT && parseInt(process.env.PORT, 10)) || 3000
 const WEBHOOK_URL = `${process.env.WEBHOOK_URL}/bot${BOT_TOKEN}`
 const CHANNEL = '@seeme_ir'
-const groups = ['1048326975']
+const groups = ['-1001048326975', '-1001096374062']
 
 const isPrivate = ctx =>
   ctx.update.callback_query.message.chat.type === 'private'
